@@ -1,0 +1,39 @@
+name: 提交皮肤
+description: 不会打 PR 时，用这条 issue 交一套外观
+title: "skin: "
+labels: ["skin"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: 皮肤名字
+      placeholder: 草原白椅
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: 作者
+    validations:
+      required: true
+  - type: dropdown
+    id: skin
+    attributes:
+      label: 内置皮肤
+      options: [default, rose, gothic, mist, ocean, ember]
+    validations:
+      required: true
+  - type: textarea
+    id: desc
+    attributes:
+      label: 简介
+      description: 中英任一。写清壁纸来源。
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: 文件
+      description: 贴 .grokskin 或预览图的下载链接。不要把密钥放进来。
+    validations:
+      required: true

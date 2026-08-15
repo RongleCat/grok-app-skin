@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "white-chair-meadow",
+  "name": "草原白椅",
+  "description": "武政谅风格丝网印刷插画。颗粒肌理，超广角航拍下的无尽绿原，一把白椅坐在云影里。壁纸来自即梦 AI @Nengz。",
+  "author": "RongleCat",
+  "createdAt": 1776211200000,
+  "skin": "default",
+  "scrim": 100,
+  "wallpaper": {
+    "file": "assets/wallpaper.jpg",
+    "kind": "image",
+    "mime": "image/jpeg",
+    "name": "草原白椅.jpg",
+    "width": 1440,
+    "height": 1920,
+    "sha256": "c902d6fc7171594ee4d86d449597052743b83b4f048f4296d10d01b2b447dd8e",
+    "focus": {
+      "cx": 0.5,
+      "cy": 0.4033942558746736,
+      "zoom": 1
+    },
+    "clip": null
+  }
+}

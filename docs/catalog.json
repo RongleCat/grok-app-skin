@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": 1776211200000,
+  "baseUrl": "https://ronglecat.github.io/grok-app-skin",
+  "packs": [
+    {
+      "id": "white-chair-meadow",
+      "name": "草原白椅",
+      "description": "武政谅风格丝网印刷插画。颗粒肌理，超广角航拍下的无尽绿原，一把白椅坐在云影里。",
+      "author": "RongleCat",
+      "previewUrl": "https://ronglecat.github.io/grok-app-skin/previews/white-chair-meadow.jpg",
+      "downloadUrl": "https://ronglecat.github.io/grok-app-skin/packs/white-chair-meadow.grokskin",
+      "sha256": "977da3385fa7a49d1b20483a06bd3ae45d6ceed42c4b023ce561d39cd96f5cef",
+      "bytes": 1073613,
+      "skin": "default",
+      "hasWallpaper": true,
+      "tags": [
+        "illustration",
+        "landscape",
+        "green",
+        "default"
+      ],
+      "kind": "image",
+      "nameEn": "White Chair Meadow",
+      "descriptionEn": "Screenprint-style meadow with grain, aerial light, and one white chair under cloud shadow.",
+      "credit": "壁纸来自即梦 AI @Nengz",
+      "creditEn": "Wallpaper by Jimeng AI @Nengz",
+      "featured": true,
+      "scrim": 100,
+      "createdAt": 1776211200000
+    }
+  ]
+}
