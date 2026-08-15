@@ -2,7 +2,7 @@ const I18N = {
   zh: {
     brand: "Grok App 皮肤",
     title: "给本机 Grok App 用的外观包",
-    lead: "一套包是皮肤、遮罩和壁纸。点应用会打开桌面版预览，不会直接改你现在的样子。",
+    lead: "一套包是皮肤、遮罩和壁纸。点应用只打开预览，不会改你现在的样子。",
     copyCatalog: "复制目录地址",
     submit: "提交一套",
     catalogHow: "在 App 里：设置 → 外观 → 皮肤源，加上这条 HTTPS。",
@@ -83,6 +83,14 @@ function applyHref(downloadUrl) {
   return `grok://skin/import?url=${encodeURIComponent(downloadUrl)}`;
 }
 
+function previewSrc(p) {
+  return p.id ? `previews/${p.id}.jpg` : p.previewUrl || "";
+}
+
+function packFileSrc(p) {
+  return p.id ? `packs/${p.id}.grokskin` : p.downloadUrl;
+}
+
 function applyPack(pack) {
   window.location.href = applyHref(pack.downloadUrl);
   const hint = document.getElementById("sheetHint");
@@ -155,7 +163,7 @@ function render() {
   const feat = state.packs.find((p) => p.featured) || state.packs[0];
   if (feat) {
     const img = document.getElementById("featuredImg");
-    img.src = feat.previewUrl || feat.downloadUrl;
+    img.src = previewSrc(feat);
     img.alt = packName(feat);
     document.getElementById("featuredCap").textContent = `${packName(feat)} · ${t("by", feat.author)}`;
   }
@@ -173,7 +181,7 @@ function cardEl(p) {
   art.className = "card__art";
   art.addEventListener("click", () => openSheet(p));
   const img = document.createElement("img");
-  img.src = p.previewUrl || "";
+  img.src = previewSrc(p);
   img.alt = packName(p);
   img.loading = "lazy";
   art.append(img);
@@ -198,8 +206,8 @@ function cardEl(p) {
   apply.addEventListener("click", () => applyPack(p));
   const dl = document.createElement("a");
   dl.className = "btn btn--ghost";
-  dl.href = p.downloadUrl;
-  dl.download = "";
+  dl.href = packFileSrc(p);
+  dl.download = `${p.id}.grokskin`;
   dl.textContent = t("download");
   actions.append(apply, dl);
   body.append(name, meta, chips, actions);
@@ -220,12 +228,13 @@ function fillSheet(p) {
   document.getElementById("sheetDesc").textContent = packDesc(p) || "";
   document.getElementById("sheetCredit").textContent = packCredit(p) || "";
   const art = document.getElementById("sheetArt");
-  art.src = p.previewUrl || "";
+  art.src = previewSrc(p);
   art.alt = packName(p);
   const apply = document.getElementById("sheetApply");
   apply.onclick = () => applyPack(p);
   const dl = document.getElementById("sheetDownload");
-  dl.href = p.downloadUrl;
+  dl.href = packFileSrc(p);
+  dl.download = `${p.id}.grokskin`;
   document.getElementById("sheetHint").hidden = true;
 }
 

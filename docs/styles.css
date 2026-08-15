@@ -46,6 +46,8 @@ html,
 body {
   margin: 0;
   min-height: 100dvh;
+  max-width: 100%;
+  overflow-x: clip;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font);
@@ -179,25 +181,31 @@ main {
 
 .intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.7fr);
-  gap: 40px;
-  align-items: end;
-  padding-bottom: 36px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.65fr);
+  gap: 36px 48px;
+  align-items: start;
+  padding: 8px 0 36px;
+  min-width: 0;
+}
+
+.intro__copy {
+  min-width: 0;
 }
 
 .intro h1 {
   margin: 0 0 12px;
-  font-size: clamp(28px, 4vw, 44px);
-  line-height: 1.12;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.15;
   letter-spacing: -0.035em;
   font-weight: 680;
-  max-width: 16ch;
+  max-width: 14em;
 }
 
 .intro p {
   margin: 0;
   color: var(--muted);
-  max-width: 46ch;
+  max-width: min(42em, 100%);
+  overflow-wrap: anywhere;
 }
 
 .intro__actions {
@@ -264,6 +272,8 @@ main {
   font-size: 12px;
   color: var(--ink);
   overflow-wrap: anywhere;
+  word-break: break-all;
+  max-width: 100%;
 }
 
 .intro__visual {
@@ -335,6 +345,8 @@ main {
 }
 
 .card__art {
+  display: block;
+  width: 100%;
   aspect-ratio: 3 / 4;
   background: #1b1f28;
   cursor: pointer;
@@ -481,13 +493,39 @@ main {
 
 @media (max-width: 767px) {
   .nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "brand lang"
+      "search search";
     padding: 10px 16px;
-    flex-wrap: wrap;
     max-height: none;
   }
 
+  .wordmark {
+    grid-area: brand;
+    min-width: 0;
+  }
+
+  .nav__right {
+    display: contents;
+  }
+
+  .search {
+    grid-area: search;
+    min-width: 0;
+  }
+
+  .lang {
+    grid-area: lang;
+  }
+
+  .nav-link {
+    display: none;
+  }
+
   .search input {
-    width: 42vw;
+    width: 100%;
   }
 
   main,
