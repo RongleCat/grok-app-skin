@@ -27,6 +27,7 @@ DEFAULT_BASE = "https://ronglecat.github.io/grok-app-skin"
 ZIP_COMMENT = b"GROKSKIN/1"
 PREVIEW_MAX = 256 * 1024
 PREVIEW_EDGE = 640
+GALLERY_SIZE = (1280, 720)
 PACK_ID_RE = __import__("re").compile(r"^[a-z0-9-]{1,64}$")
 KNOWN_SKINS = {"default", "rose", "gothic", "mist", "ocean", "ember"}
 
@@ -59,9 +60,7 @@ def zip_datetime(created_at_ms: int) -> tuple[int, int, int, int, int, int]:
     return (t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec)
 
 
-def encode_preview(wallpaper: Path) -> bytes:
-    img = Image.open(wallpaper).convert("RGB")
-    img.thumbnail((PREVIEW_EDGE, PREVIEW_EDGE), Image.Resampling.LANCZOS)
+def _jpeg_under_limit(img: Image.Image) -> bytes:
     quality = 82
     raw = b""
     while quality >= 50:
@@ -73,7 +72,40 @@ def encode_preview(wallpaper: Path) -> bytes:
         if len(raw) <= PREVIEW_MAX:
             return raw
         quality -= 8
-    raise SystemExit(f"preview for {wallpaper} exceeds {PREVIEW_MAX} bytes")
+    raise SystemExit("preview JPEG exceeds 256 KiB")
+
+
+def encode_preview(wallpaper: Path) -> bytes:
+    img = Image.open(wallpaper).convert("RGB")
+    img.thumbnail((PREVIEW_EDGE, PREVIEW_EDGE), Image.Resampling.LANCZOS)
+    return _jpeg_under_limit(img)
+
+
+def encode_gallery_preview(wallpaper: Path, focus: dict | None = None) -> bytes:
+    """16:9 crop for the Pages gallery. Does not replace the pack preview.jpg."""
+    img = Image.open(wallpaper).convert("RGB")
+    w, h = img.size
+    target = 16 / 9
+    cx = 0.5
+    cy = 0.4
+    if isinstance(focus, dict):
+        try:
+            cx = float(focus.get("cx", cx))
+            cy = float(focus.get("cy", cy))
+        except (TypeError, ValueError):
+            pass
+    cx = min(1.0, max(0.0, cx))
+    cy = min(1.0, max(0.0, cy))
+    if w / h > target:
+        new_w = max(1, int(h * target))
+        left = int(min(max(0, w * cx - new_w / 2), w - new_w))
+        img = img.crop((left, 0, left + new_w, h))
+    else:
+        new_h = max(1, int(w / target))
+        top = int(min(max(0, h * cy - new_h / 2), h - new_h))
+        img = img.crop((0, top, w, top + new_h))
+    img.thumbnail(GALLERY_SIZE, Image.Resampling.LANCZOS)
+    return _jpeg_under_limit(img)
 
 
 def write_zip(dest: Path, created_at: int, entries: list[tuple[str, bytes, int]]) -> None:
@@ -166,9 +198,17 @@ def build_one(skin_dir: Path) -> dict:
     pack_dest = PACKS_DIR / f"{pack_id}.grokskin"
     write_zip(pack_dest, created_at, entries)
 
-    if preview is not None:
+    gallery = None
+    if wall_bytes is not None and wall_kind == "image":
+        gallery = encode_gallery_preview(
+            preview_src,
+            wall.get("focus") if isinstance(wall, dict) else None,
+        )
+    elif preview is not None:
+        gallery = preview
+    if gallery is not None:
         PREVIEWS_DIR.mkdir(parents=True, exist_ok=True)
-        (PREVIEWS_DIR / f"{pack_id}.jpg").write_bytes(preview)
+        (PREVIEWS_DIR / f"{pack_id}.jpg").write_bytes(gallery)
 
     name = pick_text(meta.get("name"), "zh", str(manifest.get("name") or pack_id))
     description = pick_text(meta.get("description"), "zh", str(manifest.get("description") or ""))
@@ -195,9 +235,17 @@ def build_one(skin_dir: Path) -> dict:
         "scrim": int(manifest.get("scrim") if manifest.get("scrim") is not None else 100),
         "createdAt": created_at,
         "packRel": f"packs/{pack_id}.grokskin",
-        "previewRel": f"previews/{pack_id}.jpg" if preview is not None else "",
+        "previewRel": f"previews/{pack_id}.jpg" if gallery is not None else "",
         "bytes": pack_dest.stat().st_size,
         "sha256": sha256_file(pack_dest),
+        "focus": (
+            {
+                "cx": float(wall["focus"].get("cx", 0.5)),
+                "cy": float(wall["focus"].get("cy", 0.5)),
+            }
+            if isinstance(wall, dict) and isinstance(wall.get("focus"), dict)
+            else None
+        ),
     }
 
 
@@ -236,6 +284,9 @@ def build(base_url: str) -> dict:
         row["featured"] = p["featured"]
         row["scrim"] = p["scrim"]
         row["createdAt"] = p["createdAt"]
+        focus = p.get("focus")
+        if isinstance(focus, dict):
+            row["focus"] = focus
         catalog_packs.append(row)
 
     catalog = {

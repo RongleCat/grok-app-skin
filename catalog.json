@@ -26,6 +26,10 @@
       "credit": "壁纸来自即梦 AI @Nengz",
       "creditEn": "Wallpaper by Jimeng AI @Nengz",
       "featured": true,
+      "focus": {
+        "cx": 0.5,
+        "cy": 0.4033942558746736
+      },
       "scrim": 100,
       "createdAt": 1776211200000
     }

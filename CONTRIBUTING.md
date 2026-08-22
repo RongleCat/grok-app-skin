@@ -13,6 +13,7 @@ skins/harbor-dusk/
   manifest.json
   meta.json
   preview.jpg            # 可选；静图壁纸可由 scripts/build.py 生成
+                         # 站点画廊另写 16:9 到 docs/previews/
   assets/wallpaper.jpg   # 可选，恰好一个
 ```
 

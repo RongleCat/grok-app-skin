@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Grok App 皮肤仓库</title>
+    <meta name="color-scheme" content="dark light" />
+    <title>开源 Grok App 皮肤</title>
     <meta
       name="description"
-      content="浏览并下载 Grok App 外观包。点击即可唤起本机应用预览套用。"
+      content="开源 Grok App 皮肤仓库。16:9 工作台预览，下载或唤起本机应用套用。"
     />
-    <meta property="og:title" content="Grok App 皮肤仓库" />
+    <meta property="og:title" content="开源 Grok App 皮肤" />
     <meta
       property="og:description"
-      content="社区外观包。浏览、下载，或唤起本机 Grok App。"
+      content="社区外观包。每张卡片是壁纸加工作台预览。"
     />
     <meta property="og:type" content="website" />
     <meta
@@ -22,11 +23,16 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="grain" aria-hidden="true"></div>
+    <div class="space" aria-hidden="true">
+      <div class="space__glow"></div>
+      <div class="space__grid"></div>
+      <div class="space__grain"></div>
+    </div>
+
     <header class="nav">
       <a class="wordmark" href="./">
         <span class="wordmark__mark" aria-hidden="true"></span>
-        <span data-i18n="brand">Grok App 皮肤</span>
+        <span data-i18n="brand">开源 Grok App</span>
       </a>
       <div class="nav__right">
         <label class="search">
@@ -42,6 +48,10 @@
         <button type="button" class="lang" id="langBtn" aria-label="Switch language">
           EN
         </button>
+        <button type="button" class="theme" id="themeBtn">
+          <span aria-hidden="true" class="theme__icon"></span>
+          <span class="visually-hidden" data-i18n="themeToLight">浅色</span>
+        </button>
         <a
           class="nav-link"
           href="https://github.com/RongleCat/grok-app-skin"
@@ -52,41 +62,28 @@
     </header>
 
     <main>
-      <section class="intro">
-        <div class="intro__copy">
-          <h1 data-i18n="title">给本机 Grok App 用的外观包</h1>
-          <p data-i18n="lead">
-            一套包是皮肤、遮罩和壁纸。点应用只打开预览，不会改你现在的样子。
-          </p>
-          <div class="intro__actions">
-            <button type="button" class="btn btn--primary" id="copyCatalog">
-              <span data-i18n="copyCatalog">复制目录地址</span>
-            </button>
-            <a
-              class="btn btn--ghost"
-              href="https://github.com/RongleCat/grok-app-skin/blob/main/CONTRIBUTING.md"
-              rel="noreferrer"
-              data-i18n="submit"
-              >提交一套</a
-            >
-          </div>
-          <p class="hint" id="catalogHint">
-            <span data-i18n="catalogHow">在 App 里：设置 → 外观 → 皮肤源，加上这条 HTTPS。</span>
-            <code id="catalogUrl">https://ronglecat.github.io/grok-app-skin/catalog.json</code>
-          </p>
+      <section class="hero">
+        <p class="kicker" data-i18n="kicker">皮肤仓库</p>
+        <h1 data-i18n="title">先看见工作台上的样子</h1>
+        <p class="lead" data-i18n="lead">
+          每张卡片是 16:9 主题预览：壁纸铺满，上面叠一层开源 Grok App 的侧栏和对话。点应用只打开确认，不会改你现在的样子。
+        </p>
+        <div class="hero__actions">
+          <button type="button" class="btn btn--primary" id="copyCatalog">
+            <span data-i18n="copyCatalog">复制目录地址</span>
+          </button>
+          <a
+            class="btn btn--ghost"
+            href="https://github.com/RongleCat/grok-app-skin/blob/main/CONTRIBUTING.md"
+            rel="noreferrer"
+            data-i18n="submit"
+            >提交一套</a
+          >
         </div>
-        <figure class="intro__visual" id="featured">
-          <div class="intro__frame">
-            <img
-              id="featuredImg"
-              src="previews/white-chair-meadow.jpg"
-              alt=""
-              width="480"
-              height="640"
-            />
-          </div>
-          <figcaption id="featuredCap"></figcaption>
-        </figure>
+        <p class="hint" id="catalogHint">
+          <span data-i18n="catalogHow">在 App 里：设置 → 外观 → 皮肤源，加上这条 HTTPS。</span>
+          <code id="catalogUrl">https://ronglecat.github.io/grok-app-skin/catalog.json</code>
+        </p>
       </section>
 
       <section class="gallery" aria-labelledby="galleryTitle">
@@ -101,18 +98,28 @@
 
     <footer class="foot">
       <p>
-        <span data-i18n="foot">非官方社区仓库。需要桌面版才能唤起套用。</span>
-        <a href="https://github.com/RongleCat/grok-app/releases">Grok App</a>
+        <span data-i18n="foot">社区皮肤仓库。需要桌面版才能唤起套用。</span>
+        <a href="https://github.com/RongleCat/grok-app/releases">开源 Grok App</a>
         ·
         <a href="https://github.com/RongleCat/grok-app-skin">GitHub</a>
+        ·
+        <a
+          href="https://github.com/RongleCat/grok-app-skin/blob/main/CONTRIBUTING.md"
+          data-i18n="submit"
+          >提交一套</a
+        >
       </p>
     </footer>
 
     <div class="sheet" id="sheet" hidden>
       <button type="button" class="sheet__backdrop" id="sheetClose" aria-label="Close"></button>
       <article class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-        <img class="sheet__art" id="sheetArt" alt="" />
+        <div class="sheet__stage">
+          <img class="sheet__wall" id="sheetArt" alt="" />
+          <div class="sheet__chrome" id="sheetChrome"></div>
+        </div>
         <div class="sheet__body">
+          <p class="sheet__kicker" id="sheetKicker"></p>
           <h2 id="sheetTitle"></h2>
           <p class="sheet__meta" id="sheetMeta"></p>
           <p class="sheet__desc" id="sheetDesc"></p>

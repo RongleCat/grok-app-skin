@@ -6,6 +6,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import stat
 import sys
 import zipfile
 from pathlib import Path
@@ -93,10 +94,35 @@ def main() -> None:
     print(f"ok: {len(packs)} pack(s)")
 
 
+def zip_name_unsafe(filename: str) -> bool:
+    raw = filename.replace("\\", "/")
+    if raw.startswith("/") or raw.startswith("\\"):
+        return True
+    if re.match(r"^[a-zA-Z]:", filename):
+        return True
+    return ".." in [part for part in raw.split("/") if part]
+
+
+def zip_entry_forbidden_mode(info: zipfile.ZipInfo) -> str | None:
+    unix_mode = info.external_attr >> 16
+    if stat.S_ISLNK(unix_mode):
+        return "symlink"
+    if info.is_dir():
+        return None
+    if unix_mode and (unix_mode & 0o111):
+        return "executable bit"
+    return None
+
+
 def validate_zip(pid: str, path: Path) -> None:
     with zipfile.ZipFile(path) as zf:
         names = []
         for info in zf.infolist():
+            if zip_name_unsafe(info.filename):
+                fail(f"{pid}: path traversal in zip entry {info.filename!r}")
+            mode_err = zip_entry_forbidden_mode(info)
+            if mode_err:
+                fail(f"{pid}: {mode_err} not allowed ({info.filename})")
             name = info.filename.replace("\\", "/").lower()
             if name.endswith("/") and name == "assets/":
                 continue

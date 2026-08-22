@@ -1,16 +1,14 @@
-# Grok App skins
+# Open-source Grok App skins
 
-Community appearance packs for [Grok App](https://github.com/RongleCat/grok-app). Browse, download, or hand a pack to the local desktop app for preview.
+Community appearance packs for [Open-source Grok App](https://github.com/RongleCat/grok-app). Browse, download, or hand a pack to the local desktop app for preview.
 
 **Site:** [https://ronglecat.github.io/grok-app-skin/](https://ronglecat.github.io/grok-app-skin/)
 
 [中文](./README.md)
 
-> Grok App is not an official xAI product. This repo is not an official theme store.
+## Gallery
 
-## Does GitHub Pages cover this
-
-Yes. v1 is static Pages. No extra backend.
+A static GitHub Pages site. Each skin is a **16:9** card: wallpaper fills the frame, with a translucent workbench silhouette (sidebar + chat bubbles) so you can see the look in Open-source Grok App. Opening a card shows details. Apply only fires a deep link; nothing auto-applies.
 
 | Need | How |
 |------|-----|
@@ -47,7 +45,7 @@ scripts/build.py            pack + catalog
 docs/                       GitHub Pages root
 ```
 
-A `.grokskin` is a ZIP of `manifest.json`, optional `preview.jpg`, and at most one `assets/wallpaper.{jpg,jpeg,png,webp,gif,mp4,webm}`. Comment `GROKSKIN/1`. No `tokens` / `style` / `css`. Never write `themePreference`.
+A `.grokskin` is a ZIP of `manifest.json`, optional `preview.jpg`, and at most one `assets/wallpaper.{jpg,jpeg,png,webp,gif,mp4,webm}`. Comment `GROKSKIN/1`. No `tokens` / `style` / `css`. Never write `themePreference`. Validation rejects path traversal (`../`) and executable bits.
 
 ## First pack
 

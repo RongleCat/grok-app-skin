@@ -1,16 +1,14 @@
-# Grok App 皮肤仓库
+# 开源 Grok App 皮肤仓库
 
-Grok App 的社区外观包。浏览、下载，或一键唤起本机 [Grok App](https://github.com/RongleCat/grok-app) 预览套用。
+开源 [Grok App](https://github.com/RongleCat/grok-app) 的社区外观包。浏览、下载，或一键唤起本机应用预览套用。
 
 **站点：** [https://ronglecat.github.io/grok-app-skin/](https://ronglecat.github.io/grok-app-skin/)
 
 [English](./README_EN.md)
 
-> Grok App 不是 xAI 官方产品。本仓库也不是官方主题市场。
+## 画廊
 
-## GitHub Pages 能不能做
-
-能。第一版就走 Pages，不需要单独的后端。
+GitHub Pages 静态站。每套皮肤是一张 **16:9** 卡片：壁纸铺满画面，上面叠一层半透明的工作台剪影（侧栏 + 对话气泡），用来看皮肤套在开源 Grok App 里的样子。点卡片打开详情；「应用」只发深链，不会自动改本机外观。
 
 | 需求 | 怎么做 |
 |------|--------|
@@ -55,11 +53,11 @@ docs/                       GitHub Pages 根目录
   index.html
   catalog.json
   packs/<id>.grokskin
-  previews/<id>.jpg
+  previews/<id>.jpg         画廊用 16:9
 catalog.json                与 docs 同步的副本
 ```
 
-`.grokskin` 是 ZIP：`manifest.json`、可选 `preview.jpg`、可选恰好一张 `assets/wallpaper.{jpg,jpeg,png,webp,gif,mp4,webm}`。注释为 `GROKSKIN/1`。禁止 `tokens` / `style` / `css`。从不写入 `themePreference`。
+`.grokskin` 是 ZIP：`manifest.json`、可选 `preview.jpg`、可选恰好一张 `assets/wallpaper.{jpg,jpeg,png,webp,gif,mp4,webm}`。注释为 `GROKSKIN/1`。禁止 `tokens` / `style` / `css`。从不写入 `themePreference`。校验会拒绝路径穿越（`../`）和可执行位。
 
 ## 第一套皮肤
 
