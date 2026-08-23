@@ -3,22 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark light" />
+    <meta name="color-scheme" content="dark" />
     <title>开源 Grok App 皮肤</title>
     <meta
       name="description"
-      content="开源 Grok App 皮肤仓库。16:9 工作台预览，下载或唤起本机应用套用。"
+      content="开源 Grok App 皮肤仓库。浏览画廊请到官网 grok-app.com/skins；本仓库继续收社区外观包。"
     />
     <meta property="og:title" content="开源 Grok App 皮肤" />
     <meta
       property="og:description"
-      content="社区外观包。每张卡片是壁纸加工作台预览。"
+      content="皮肤画廊已迁到官网。catalog、预览图和 .grokskin 仍在本仓库。"
     />
     <meta property="og:type" content="website" />
     <meta
       property="og:image"
       content="https://ronglecat.github.io/grok-app-skin/previews/white-chair-meadow.jpg"
     />
+    <link rel="canonical" href="https://grok-app.com/skins/" />
     <link rel="icon" href="favicon.jpg" type="image/jpeg" />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -30,27 +31,13 @@
     </div>
 
     <header class="nav">
-      <a class="wordmark" href="./">
+      <a class="wordmark" href="https://grok-app.com/" rel="noreferrer">
         <span class="wordmark__mark" aria-hidden="true"></span>
         <span data-i18n="brand">开源 Grok App</span>
       </a>
       <div class="nav__right">
-        <label class="search">
-          <span class="visually-hidden" data-i18n="search">搜索皮肤</span>
-          <input
-            id="filter"
-            type="search"
-            autocomplete="off"
-            data-i18n-placeholder="searchPh"
-            placeholder="搜索名字、作者、标签"
-          />
-        </label>
         <button type="button" class="lang" id="langBtn" aria-label="Switch language">
           EN
-        </button>
-        <button type="button" class="theme" id="themeBtn">
-          <span aria-hidden="true" class="theme__icon"></span>
-          <span class="visually-hidden" data-i18n="themeToLight">浅色</span>
         </button>
         <a
           class="nav-link"
@@ -62,16 +49,27 @@
     </header>
 
     <main>
+      <p class="banner" role="status">
+        <span data-i18n="banner">皮肤画廊已迁到官网。浏览、预览、套用请到 grok-app.com/skins。</span>
+      </p>
+
       <section class="hero">
         <p class="kicker" data-i18n="kicker">皮肤仓库</p>
-        <h1 data-i18n="title">先看见工作台上的样子</h1>
+        <h1 data-i18n="title">浏览皮肤，请到官网</h1>
         <p class="lead" data-i18n="lead">
-          每张卡片是 16:9 主题预览：壁纸铺满，上面叠一层开源 Grok App 的侧栏和对话。点应用只打开确认，不会改你现在的样子。
+          画廊已在开源 Grok App 官网开放。这个仓库继续收社区外观包；catalog、预览图和 .grokskin 的地址不变。
         </p>
         <div class="hero__actions">
-          <button type="button" class="btn btn--primary" id="copyCatalog">
-            <span data-i18n="copyCatalog">复制目录地址</span>
-          </button>
+          <a class="btn btn--primary" href="https://grok-app.com/skins/">
+            <span data-i18n="cta">打开官网画廊</span>
+          </a>
+          <a
+            class="btn btn--ghost"
+            href="https://github.com/RongleCat/grok-app-skin"
+            rel="noreferrer"
+            data-i18n="repo"
+            >GitHub 仓库</a
+          >
           <a
             class="btn btn--ghost"
             href="https://github.com/RongleCat/grok-app-skin/blob/main/CONTRIBUTING.md"
@@ -80,26 +78,30 @@
             >提交一套</a
           >
         </div>
-        <p class="hint" id="catalogHint">
-          <span data-i18n="catalogHow">在 App 里：设置 → 外观 → 皮肤源，加上这条 HTTPS。</span>
-          <code id="catalogUrl">https://ronglecat.github.io/grok-app-skin/catalog.json</code>
-        </p>
       </section>
 
-      <section class="gallery" aria-labelledby="galleryTitle">
-        <div class="gallery__head">
-          <h2 id="galleryTitle" data-i18n="gallery">全部皮肤</h2>
-          <p class="count" id="count"></p>
-        </div>
-        <p class="status" id="status" hidden></p>
-        <ul class="grid" id="grid"></ul>
+      <section class="panel" aria-labelledby="devTitle">
+        <h2 id="devTitle" data-i18n="devTitle">给开发者</h2>
+        <p class="panel__lead" data-i18n="devLead">
+          App 皮肤源、jsDelivr 和官网画廊仍读这里的 catalog 与包文件。路径不要改。
+        </p>
+        <p class="hint">
+          <span data-i18n="catalogHow">在 App 里：设置 → 外观 → 皮肤源，加上这条 HTTPS。</span>
+          <a class="catalog" id="catalogUrl" href="catalog.json">https://ronglecat.github.io/grok-app-skin/catalog.json</a>
+        </p>
+        <p class="paths">
+          <code>packs/&lt;id&gt;.grokskin</code>
+          <code>previews/&lt;id&gt;.jpg</code>
+        </p>
       </section>
     </main>
 
     <footer class="foot">
       <p>
-        <span data-i18n="foot">社区皮肤仓库。需要桌面版才能唤起套用。</span>
-        <a href="https://github.com/RongleCat/grok-app/releases">开源 Grok App</a>
+        <span data-i18n="foot">开源 Grok App 社区皮肤仓库。浏览画廊请到官网。</span>
+        <a href="https://grok-app.com/skins/" data-i18n="ctaShort">官网画廊</a>
+        ·
+        <a href="https://github.com/RongleCat/grok-app">开源 Grok App</a>
         ·
         <a href="https://github.com/RongleCat/grok-app-skin">GitHub</a>
         ·
@@ -111,31 +113,65 @@
       </p>
     </footer>
 
-    <div class="sheet" id="sheet" hidden>
-      <button type="button" class="sheet__backdrop" id="sheetClose" aria-label="Close"></button>
-      <article class="sheet__panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-        <div class="sheet__stage">
-          <img class="sheet__wall" id="sheetArt" alt="" />
-          <div class="sheet__chrome" id="sheetChrome"></div>
-        </div>
-        <div class="sheet__body">
-          <p class="sheet__kicker" id="sheetKicker"></p>
-          <h2 id="sheetTitle"></h2>
-          <p class="sheet__meta" id="sheetMeta"></p>
-          <p class="sheet__desc" id="sheetDesc"></p>
-          <p class="sheet__credit" id="sheetCredit"></p>
-          <div class="sheet__actions">
-            <button type="button" class="btn btn--primary" id="sheetApply" data-i18n="apply">
-              应用到 Grok App
-            </button>
-            <a class="btn btn--ghost" id="sheetDownload" download data-i18n="download">下载</a>
-          </div>
-          <p class="hint" id="sheetHint" hidden></p>
-        </div>
-      </article>
-    </div>
+    <script>
+      const I18N = {
+        zh: {
+          brand: "开源 Grok App",
+          banner:
+            "皮肤画廊已迁到官网。浏览、预览、套用请到 grok-app.com/skins。",
+          kicker: "皮肤仓库",
+          title: "浏览皮肤，请到官网",
+          lead: "画廊已在开源 Grok App 官网开放。这个仓库继续收社区外观包；catalog、预览图和 .grokskin 的地址不变。",
+          cta: "打开官网画廊",
+          ctaShort: "官网画廊",
+          repo: "GitHub 仓库",
+          submit: "提交一套",
+          devTitle: "给开发者",
+          devLead:
+            "App 皮肤源、jsDelivr 和官网画廊仍读这里的 catalog 与包文件。路径不要改。",
+          catalogHow: "在 App 里：设置 → 外观 → 皮肤源，加上这条 HTTPS。",
+          foot: "开源 Grok App 社区皮肤仓库。浏览画廊请到官网。",
+          pageTitle: "开源 Grok App 皮肤",
+        },
+        en: {
+          brand: "Open-source Grok App",
+          banner:
+            "The skin gallery moved to the official site. Browse, preview, and apply at grok-app.com/skins.",
+          kicker: "Skin catalog",
+          title: "Browse skins on the official site",
+          lead: "The gallery now lives on the Open-source Grok App website. This repo still accepts community packs. Catalog, preview, and .grokskin URLs are unchanged.",
+          cta: "Open the official gallery",
+          ctaShort: "Official gallery",
+          repo: "GitHub repo",
+          submit: "Submit a pack",
+          devTitle: "For developers",
+          devLead:
+            "App skin sources, jsDelivr, and the official gallery still read catalog.json and pack files here. Keep these paths.",
+          catalogHow:
+            "In the app: Settings → Appearance → skin sources, then add this HTTPS URL.",
+          foot: "Open-source Grok App community skin repo. Browse the gallery on the official site.",
+          pageTitle: "Open-source Grok App skins",
+        },
+      };
 
-    <p class="toast" id="toast" hidden></p>
-    <script src="app.js"></script>
+      const lang = localStorage.getItem("gas.lang") === "en" ? "en" : "zh";
+
+      function apply(next) {
+        const table = I18N[next];
+        document.documentElement.lang = next === "en" ? "en" : "zh-CN";
+        document.title = table.pageTitle;
+        document.getElementById("langBtn").textContent = next === "en" ? "中文" : "EN";
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          el.textContent = table[el.getAttribute("data-i18n")];
+        });
+      }
+
+      apply(lang);
+      document.getElementById("langBtn").addEventListener("click", () => {
+        const next = document.documentElement.lang === "en" ? "zh" : "en";
+        localStorage.setItem("gas.lang", next);
+        apply(next);
+      });
+    </script>
   </body>
 </html>

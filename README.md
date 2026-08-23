@@ -1,25 +1,32 @@
 # 开源 Grok App 皮肤仓库
 
-开源 [Grok App](https://github.com/RongleCat/grok-app) 的社区外观包。浏览、下载，或一键唤起本机应用预览套用。
+开源 [Grok App](https://github.com/RongleCat/grok-app) 的社区外观包。用 PR 提交皮肤源文件；浏览、预览、套用请到官网画廊。
 
-**站点：** [https://ronglecat.github.io/grok-app-skin/](https://ronglecat.github.io/grok-app-skin/)
+**浏览画廊：** [https://grok-app.com/skins/](https://grok-app.com/skins/)
+
+**本仓库：** 皮肤源文件与 PR 仍在这里。`catalog.json`、预览图、`.grokskin` 继续由 GitHub Pages 提供，地址不变。
 
 [English](./README_EN.md)
 
-## 画廊
+## 画廊在哪
 
-GitHub Pages 静态站。每套皮肤是一张 **16:9** 卡片：壁纸铺满画面，上面叠一层半透明的工作台剪影（侧栏 + 对话气泡），用来看皮肤套在开源 Grok App 里的样子。点卡片打开详情；「应用」只发深链，不会自动改本机外观。
+浏览皮肤请到官网 [grok-app.com/skins](https://grok-app.com/skins/)。本仓库的 GitHub Pages 只做交接说明，不再展示卡片画廊。
+
+包下载和预览 URL 保持不变（官网和 jsDelivr 仍用这些地址）：
+
+```
+https://ronglecat.github.io/grok-app-skin/catalog.json
+https://ronglecat.github.io/grok-app-skin/packs/<id>.grokskin
+https://ronglecat.github.io/grok-app-skin/previews/<id>.jpg
+```
 
 | 需求 | 怎么做 |
 |------|--------|
-| 批量展示所有预设 | 静态页读同目录的 `catalog.json` |
-| 点击套用到本机 App | `grok://skin/import?url=`，`url` 指向 Pages 上的 `.grokskin` |
-| 用户提交 / 下载 | PR 交 `skins/<id>/`；站点提供下载兜底 |
+| 浏览 / 套用 | 官网 [grok-app.com/skins](https://grok-app.com/skins/) |
+| 提交一套 | PR 交 `skins/<id>/`，见 [CONTRIBUTING.md](./CONTRIBUTING.md) |
 | App 里当皮肤源 | 把 catalog 地址加到「外观 → 皮肤源」 |
 
 Catalog 和包必须同 origin。用户源不允许 catalog 在 Pages、包在 Releases。所以 **json、预览图、`.grokskin` 全部放在 `*.github.io`**。
-
-官方源以后可以改成 Pages catalog + GitHub Releases（Host 对 `github.com` / `githubusercontent.com` 开了白名单）。现在官网 catalog URL 还是空的，网站只用 `url=`，不出 `repo=` 按钮。
 
 套用不会自动发生。深链只打开 App 的预览确认框。
 
@@ -31,7 +38,7 @@ https://ronglecat.github.io/grok-app-skin/catalog.json
 
 设置 → 外观 → 皮肤源 → 添加上述 HTTPS 地址。刷新后就能在目录里看到本仓库的包。
 
-网站上的「应用到 Grok App」不经过 catalog，直接：
+官网画廊的「应用到 Grok App」不经过 catalog，直接：
 
 ```
 grok://skin/import?url=https%3A%2F%2Fronglecat.github.io%2Fgrok-app-skin%2Fpacks%2Fwhite-chair-meadow.grokskin
@@ -49,11 +56,11 @@ skins/<id>/                 源文件，PR 只改这里
   assets/wallpaper.<ext>
 scripts/build.py            打包 + 写 catalog
 scripts/validate.py
-docs/                       GitHub Pages 根目录
-  index.html
+docs/                       GitHub Pages 根目录（交接页 + 资源）
+  index.html                指向官网画廊的交接页
   catalog.json
   packs/<id>.grokskin
-  previews/<id>.jpg         画廊用 16:9
+  previews/<id>.jpg         16:9 预览，官网 / jsDelivr 仍读这里
 catalog.json                与 docs 同步的副本
 ```
 
@@ -61,11 +68,11 @@ catalog.json                与 docs 同步的副本
 
 ## 第一套皮肤
 
-[草原白椅](https://ronglecat.github.io/grok-app-skin/)（`white-chair-meadow`）是当前本机正在用的那一套：内置 `default` 皮肤、scrim 100、一张 1440×1920 的绿原白椅插画，焦点略偏椅子。壁纸来自即梦 AI @Nengz。
+[草原白椅](https://grok-app.com/skins/)（`white-chair-meadow`）是当前本机正在用的那一套：内置 `default` 皮肤、scrim 100、一张 1440×1920 的绿原白椅插画，焦点略偏椅子。壁纸来自即梦 AI @Nengz。
 
 ## 提交新皮肤
 
-见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+见 [CONTRIBUTING.md](./CONTRIBUTING.md)。浏览画廊请到 [grok-app.com/skins](https://grok-app.com/skins/)；PR 仍开在本仓库。
 
 ```bash
 python3 -m pip install pillow

@@ -13,7 +13,7 @@ skins/harbor-dusk/
   manifest.json
   meta.json
   preview.jpg            # 可选；静图壁纸可由 scripts/build.py 生成
-                         # 站点画廊另写 16:9 到 docs/previews/
+                         # 构建脚本另写 16:9 到 docs/previews/（官网画廊仍读这里）
   assets/wallpaper.jpg   # 可选，恰好一个
 ```
 
@@ -35,7 +35,7 @@ skins/harbor-dusk/
 
 ### `meta.json`
 
-画廊用的双语名字、标签、署名。App 读 catalog 时会忽略这些额外字段。
+官网画廊用的双语名字、标签、署名。App 读 catalog 时会忽略这些额外字段。浏览画廊请到 [grok-app.com/skins](https://grok-app.com/skins/)；PR 仍开在本仓库。
 
 ```json
 {
@@ -93,9 +93,9 @@ python3 scripts/validate.py
 
 不要提交 `__MACOSX`、`.DS_Store`、密钥、或整包 CSS。
 
-## 网站上的「应用到 Grok App」
+## 官网画廊上的「应用到 Grok App」
 
-按钮只发：
+浏览皮肤请到 [https://grok-app.com/skins/](https://grok-app.com/skins/)。按钮只发：
 
 ```
 grok://skin/import?url=https%3A%2F%2Fronglecat.github.io%2Fgrok-app-skin%2Fpacks%2F<id>.grokskin
